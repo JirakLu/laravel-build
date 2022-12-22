@@ -1,0 +1,13 @@
+/.git
+/.idea
+/build
+/docker
+build.sh
+docker-compose.yml
+.gitignore
+.build-exclude.txt
+.editorconfig
+.env.example
+.gitattributes
+phpunit.xml
+README.md

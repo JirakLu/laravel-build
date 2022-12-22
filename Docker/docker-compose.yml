@@ -1,0 +1,50 @@
+version: '3'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: prod.Dockerfile
+    container_name: maturak_app
+    restart: unless-stopped
+    tty: true
+    hostname: localhost
+    working_dir: /var/www
+#    volumes:
+#      - ./build:/var/www/localhost/htdocs
+    networks:
+      - app-network
+    ports:
+      - "8000:80"
+      - "25:25"
+
+  db:
+    image: mariadb
+    container_name: maturak_db
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: app
+      MYSQL_ROOT_PASSWORD: secret
+    volumes:
+      - dbdata:/var/lib/mysql
+    networks:
+      - app-network
+
+  mailhog:
+    image: mailhog/mailhog
+    container_name: maturak_mailhog
+    ports:
+      - "8025:8025"
+      - "1025:1025"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  dbdata:
+    driver: local
