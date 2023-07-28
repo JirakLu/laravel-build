@@ -2,7 +2,8 @@
 /.idea
 /build
 /docker
-build.sh
+build-prod.sh
+build-test.sh
 docker-compose.yml
 .gitignore
 .build-exclude.txt
